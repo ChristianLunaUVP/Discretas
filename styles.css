@@ -1,0 +1,86 @@
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('https://www.xtrafondos.com/wallpapers/estrellas-en-el-universo-morado-4465.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(10px);
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    margin-bottom: 70px;
+}
+
+.container {
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline-dark {
+    color: #ffffff;
+    border-color: #ffffff;
+    white-space: normal;
+}
+
+.btn-outline-dark:hover {
+    background-color: #800080;
+    border-color: #800080;
+}
+
+.btn-outline-dark.focus,
+.btn-outline-dark:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+
+.btn-outline-dark:not(:disabled):not(.disabled).active,
+.btn-outline-dark:not(:disabled):not(.disabled):active,
+.show > .btn-outline-dark.dropdown-toggle {
+    background-color: #800080;
+    border-color: #800080;
+}
+
+.btn-outline-dark:not(:disabled):not(.disabled).active:focus,
+.btn-outline-dark:not(:disabled):not(.disabled):active:focus,
+.show > .btn-outline-dark.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+
+.btn-outline-dark:not(:disabled):not(.disabled):active,
+.btn-outline-dark:not(:disabled):not(.disabled).active {
+    background-image: none;
+}
+
+.form-control {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+.form-control:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.container-sets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.set-btn {
+    min-width: auto;
+    min-height: auto;
+    padding: 5px 10px;
+}
+
+.btn-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}

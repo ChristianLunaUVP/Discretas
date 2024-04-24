@@ -58,7 +58,7 @@ body {
 
 .form-control {
     border-color: #ffffff;
-    color: #ffffff;
+    color: #000000;
 }
 
 .form-control:focus {

@@ -128,3 +128,73 @@ function scrollToTop() {
         behavior: 'smooth'
     });
 }
+
+let currentIndex = 0;
+let nValue = 0;
+
+function deBruijn(n) {
+    let k = 2;
+    let sequence = Array(n).fill(0); // Inicializamos sequence aquí
+    let db = function(t, p) {
+        if (t > n) {
+            if (n % p === 0) {
+                for (let i = 1; i <= p; i++) {
+                    sequence.push(sequence[i]);
+                }
+            }
+        } else {
+            sequence[t] = sequence[t - p];
+            db(t + 1, p);
+            for (let j = sequence[t - p] + 1; j < k; j++) {
+                sequence[t] = j;
+                db(t + 1, t);
+            }
+        }
+    }
+    db(1, 1);
+    return sequence.join("");
+}
+
+function resaltarNumeros() {
+    let n = document.getElementById("length").value;
+    if (n !== nValue) {
+        nValue = n;
+        currentIndex = 0;
+    }
+
+    let dbSequence = deBruijn(nValue);
+    let length = dbSequence.length;
+    let end = currentIndex + parseInt(nValue);
+    if (end > length) {
+        currentIndex = 0;
+        end = parseInt(nValue);
+    }
+
+    let resaltado = '';
+    let conjuntoResaltado = dbSequence.substring(currentIndex, end);
+    for (let i = 0; i < length; i++) {
+        if (i >= currentIndex && i < end) {
+            resaltado += `<span style="background-color: ${i >= currentIndex && i < end ? '#800080' : 'transparent'}; cursor: pointer;" onclick="highlightSet(${i})">${dbSequence[i]}</span>`;
+        } else {
+            resaltado += `<span style="cursor: pointer;" onclick="highlightSet(${i})">${dbSequence[i]}</span>`;
+        }
+    }
+
+    currentIndex++;
+    document.getElementById("debruijn").innerHTML = resaltado;
+
+    // Resaltar el conjunto correspondiente en la tabla
+    let conjuntos = document.getElementById("conjuntos").getElementsByTagName("p");
+    for (let i = 0; i < conjuntos.length; i++) {
+        if (conjuntos[i].innerHTML.includes(conjuntoResaltado)) {
+            conjuntos[i].innerHTML = `<span style="background-color: yellow;">${conjuntoResaltado}</span>`;
+        } else {
+            conjuntos[i].innerHTML = conjuntos[i].innerHTML.replace('<span style="background-color: yellow;">', '').replace('</span>', '');
+        }
+    }
+}
+
+function highlightSet(index) {
+    currentIndex = index;
+    resaltarNumeros();
+}

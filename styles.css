@@ -84,3 +84,34 @@ body {
     right: 20px;
     z-index: 1000;
 }
+
+/* Estilo personalizado para ajustar el tamaño de la fuente de la secuencia de De Bruijn */
+#debruijn-container {
+    overflow-x: auto; /* Agregar barra de desplazamiento horizontal */
+}
+
+/* Estilo personalizado para ajustar el tamaño de la fuente de la secuencia de De Bruijn */
+#debruijn {
+    font-size: 1.5rem; /* Tamaño de fuente base */
+    white-space: nowrap; /* Evitar el retorno de línea */
+}
+
+@media (max-width: 576px) {
+    /* Tamaño de fuente reducido para dispositivos pequeños */
+    #debruijn {
+        font-size: 1rem;
+    }
+}
+
+/* Estilo personalizado para la animación */
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: marquee linear infinite;
+    display: inline-block;
+}

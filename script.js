@@ -1,3 +1,4 @@
+
 var currentHighlightIndex = 0;
 var sets;
 var gotoPositionClicked = false;
@@ -5,10 +6,6 @@ var gotoPositionClicked = false;
 function generateSequence() {
     var startTime = performance.now();
     var length = parseInt(document.getElementById("length").value);
-    if (length < 3 || length > 10) {
-        alert("Ingrese un número entre 3 y 10.");
-        return;
-    }
 
     var binarySets = [];
     
@@ -22,6 +19,9 @@ function generateSequence() {
 
     var endTime = performance.now();
     var executionTime = endTime - startTime;
+
+    // Mostrar el tiempo de ejecución en un popup
+    alert(`Tiempo de ejecución: ${executionTime.toFixed(2)} milisegundos`);
 
     var resultDiv = document.getElementById("result");
     resultDiv.innerHTML = `
@@ -55,8 +55,8 @@ function generateSequence() {
     // Resaltar el primer conjunto seleccionado
     highlightSet(0);
 
-    // Reiniciar el estado de la variable gotoPositionClicked
-    gotoPositionClicked = false;
+    // Mostrar el tiempo de ejecución
+    document.getElementById("executionTime").innerText = `Tiempo de ejecución: ${executionTime.toFixed(2)} milisegundos`;
 }
 
 function highlightSet(index) {
@@ -198,3 +198,5 @@ function highlightSet(index) {
     currentIndex = index;
     resaltarNumeros();
 }
+
+// Resto del código JavaScript...

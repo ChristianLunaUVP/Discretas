@@ -14,10 +14,11 @@
 <div class="container mt-5">
     <h2 class="mb-4">Generar 1 y 0</h2>
     <div class="mb-3">
-        <label for="length" class="form-label">Ingrese un número (entre 3 y 10):</label>
-        <input type="number" id="length" class="form-control" min="3" max="10">
+        <label for="length" class="form-label">Ingrese un número:</label>
+        <input type="number" id="length" class="form-control">
     </div>
     <button onclick="generateSequence()" class="btn btn-outline-dark mb-3">Generar Secuencia</button>
+    <p id="executionTime" class="mb-3"></p>
     <div class="mt-3" id="gotoPositionDiv" style="display: none;">
         <label for="position" class="form-label">Ir a la posición (Total: <span id="totalSets"></span>):</label>
         <input type="number" id="position" class="form-control" min="1" max="512">
@@ -44,5 +45,58 @@
 </div>
 <button onclick="scrollToTop()" class="btn btn-outline-dark btn-top"><i class="bi bi-arrow-up-circle-fill"></i></button>
 <script src="script.js"></script>
+<script>
+function generateSequence() {
+    var startTime = performance.now();
+    var length = parseInt(document.getElementById("length").value);
+
+    var binarySets = [];
+    
+    // Generate the binary sequence
+    for (var i = 0; i < Math.pow(2, length); i++) {
+        var binary = i.toString(2).padStart(length, "0");
+        if (binarySets.indexOf(binary) === -1) {
+            binarySets.push(binary);
+        }
+    }
+
+    var endTime = performance.now();
+    var executionTime = endTime - startTime;
+
+    var resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = `
+        <p class="mb-2">Tiempo de ejecución: ${executionTime.toFixed(2)} milisegundos</p>
+        <div class="row">
+            ${binarySets.map((set, index) => `
+                <div class="col-auto">
+                    <button type="button" class="btn btn-outline-dark mb-2 set-btn" onclick="highlightSet(${index})" style="display: none;">${set}</button>
+                </div>
+            `).join("")}
+        </div>
+    `;
+    currentHighlightIndex = 0;
+    sets = document.getElementById("result").querySelectorAll(".set-btn");
+    sets[currentHighlightIndex].style.display = "block";
+
+    // Mostrar el campo de entrada para ir a la posición
+    var gotoPositionDiv = document.getElementById("gotoPositionDiv");
+    gotoPositionDiv.style.display = "block";
+    var positionInput = document.getElementById("position");
+    positionInput.max = binarySets.length;
+    positionInput.value = 1;
+
+    // Mostrar el número total de conjuntos
+    document.getElementById("totalSets").innerText = binarySets.length;
+
+    // Mostrar el conjunto en la posición seleccionada
+    document.getElementById("currentSet").style.display = "block";
+    document.getElementById("currentSetLabel").innerText = binarySets[0];
+
+    // Resaltar el primer conjunto seleccionado
+    highlightSet(0);
+}
+
+// Resto del código JavaScript...
+</script>
 </body>
 </html>
